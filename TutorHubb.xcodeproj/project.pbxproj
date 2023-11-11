@@ -28,6 +28,7 @@
 		61C5C70B2B00384600C4218A /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70A2B00384600C4218A /* Tutor.swift */; };
 		61C5C70D2B00387000C4218A /* TutorCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70C2B00387000C4218A /* TutorCalendarView.swift */; };
 		61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */; };
+		61C5C7152B00442600C4218A /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C7142B00442600C4218A /* GoogleService-Info-2.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		61C5C70A2B00384600C4218A /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		61C5C70C2B00387000C4218A /* TutorCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorCalendarView.swift; sourceTree = "<group>"; };
 		61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDetailsView.swift; sourceTree = "<group>"; };
+		61C5C7142B00442600C4218A /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		61C5C6C52B0033E900C4218A /* TutorHubb */ = {
 			isa = PBXGroup;
 			children = (
+				61C5C7142B00442600C4218A /* GoogleService-Info-2.plist */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
 				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
 				61C5C6F42B0035EC00C4218A /* SignInView.swift */,
@@ -275,6 +278,7 @@
 			files = (
 				61C5C6CE2B0033EA00C4218A /* Preview Assets.xcassets in Resources */,
 				61C5C6CB2B0033EA00C4218A /* Assets.xcassets in Resources */,
+				61C5C7152B00442600C4218A /* GoogleService-Info-2.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
