@@ -7,13 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61C5C6C72B0033E900C4218A /* TutorHubbApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6C62B0033E900C4218A /* TutorHubbApp.swift */; };
 		61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6C82B0033E900C4218A /* ContentView.swift */; };
 		61C5C6CB2B0033EA00C4218A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CA2B0033EA00C4218A /* Assets.xcassets */; };
 		61C5C6CE2B0033EA00C4218A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CD2B0033EA00C4218A /* Preview Assets.xcassets */; };
 		61C5C6D82B0033EA00C4218A /* TutorHubbTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6D72B0033EA00C4218A /* TutorHubbTests.swift */; };
 		61C5C6E22B0033EA00C4218A /* TutorHubbUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6E12B0033EA00C4218A /* TutorHubbUITests.swift */; };
 		61C5C6E42B0033EA00C4218A /* TutorHubbUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6E32B0033EA00C4218A /* TutorHubbUITestsLaunchTests.swift */; };
+		61C5C6F32B00359A00C4218A /* TutorHubbApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */; };
+		61C5C6F52B0035EC00C4218A /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6F42B0035EC00C4218A /* SignInView.swift */; };
+		61C5C6F72B00361D00C4218A /* UserRoleSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6F62B00361D00C4218A /* UserRoleSelectionView.swift */; };
+		61C5C6F92B00365000C4218A /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6F82B00365000C4218A /* UserRole.swift */; };
+		61C5C6FB2B00368100C4218A /* StudentCourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6FA2B00368100C4218A /* StudentCourseListView.swift */; };
+		61C5C6FD2B00371E00C4218A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6FC2B00371E00C4218A /* HomeView.swift */; };
+		61C5C6FF2B00376900C4218A /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6FE2B00376900C4218A /* UserSession.swift */; };
+		61C5C7012B00378B00C4218A /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C7002B00378B00C4218A /* UserProfileView.swift */; };
+		61C5C7032B0037AF00C4218A /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C7022B0037AF00C4218A /* SettingsModel.swift */; };
+		61C5C7052B0037D100C4218A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C7042B0037D100C4218A /* SettingsView.swift */; };
+		61C5C7072B0037F500C4218A /* ColorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C7062B0037F500C4218A /* ColorSet.swift */; };
+		61C5C7092B00381A00C4218A /* TutorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C7082B00381A00C4218A /* TutorListView.swift */; };
+		61C5C70B2B00384600C4218A /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70A2B00384600C4218A /* Tutor.swift */; };
+		61C5C70D2B00387000C4218A /* TutorCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70C2B00387000C4218A /* TutorCalendarView.swift */; };
+		61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		61C5C6C32B0033E900C4218A /* TutorHubb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorHubb.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		61C5C6C62B0033E900C4218A /* TutorHubbApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorHubbApp.swift; sourceTree = "<group>"; };
 		61C5C6C82B0033E900C4218A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		61C5C6CA2B0033EA00C4218A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61C5C6CD2B0033EA00C4218A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,6 +57,21 @@
 		61C5C6DD2B0033EA00C4218A /* TutorHubbUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TutorHubbUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C5C6E12B0033EA00C4218A /* TutorHubbUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorHubbUITests.swift; sourceTree = "<group>"; };
 		61C5C6E32B0033EA00C4218A /* TutorHubbUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorHubbUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorHubbApp.swift; sourceTree = "<group>"; };
+		61C5C6F42B0035EC00C4218A /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		61C5C6F62B00361D00C4218A /* UserRoleSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoleSelectionView.swift; sourceTree = "<group>"; };
+		61C5C6F82B00365000C4218A /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		61C5C6FA2B00368100C4218A /* StudentCourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCourseListView.swift; sourceTree = "<group>"; };
+		61C5C6FC2B00371E00C4218A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		61C5C6FE2B00376900C4218A /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		61C5C7002B00378B00C4218A /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		61C5C7022B0037AF00C4218A /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		61C5C7042B0037D100C4218A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		61C5C7062B0037F500C4218A /* ColorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSet.swift; sourceTree = "<group>"; };
+		61C5C7082B00381A00C4218A /* TutorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorListView.swift; sourceTree = "<group>"; };
+		61C5C70A2B00384600C4218A /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
+		61C5C70C2B00387000C4218A /* TutorCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorCalendarView.swift; sourceTree = "<group>"; };
+		61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +122,22 @@
 		61C5C6C52B0033E900C4218A /* TutorHubb */ = {
 			isa = PBXGroup;
 			children = (
-				61C5C6C62B0033E900C4218A /* TutorHubbApp.swift */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
+				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
+				61C5C6F42B0035EC00C4218A /* SignInView.swift */,
+				61C5C6F62B00361D00C4218A /* UserRoleSelectionView.swift */,
+				61C5C6F82B00365000C4218A /* UserRole.swift */,
+				61C5C6FA2B00368100C4218A /* StudentCourseListView.swift */,
+				61C5C6FC2B00371E00C4218A /* HomeView.swift */,
+				61C5C6FE2B00376900C4218A /* UserSession.swift */,
+				61C5C7002B00378B00C4218A /* UserProfileView.swift */,
+				61C5C7022B0037AF00C4218A /* SettingsModel.swift */,
+				61C5C7042B0037D100C4218A /* SettingsView.swift */,
+				61C5C7062B0037F500C4218A /* ColorSet.swift */,
+				61C5C7082B00381A00C4218A /* TutorListView.swift */,
+				61C5C70A2B00384600C4218A /* Tutor.swift */,
+				61C5C70C2B00387000C4218A /* TutorCalendarView.swift */,
+				61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */,
 				61C5C6CA2B0033EA00C4218A /* Assets.xcassets */,
 				61C5C6CC2B0033EA00C4218A /* Preview Content */,
 			);
@@ -257,8 +299,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61C5C6F72B00361D00C4218A /* UserRoleSelectionView.swift in Sources */,
+				61C5C7012B00378B00C4218A /* UserProfileView.swift in Sources */,
+				61C5C6FD2B00371E00C4218A /* HomeView.swift in Sources */,
+				61C5C6FB2B00368100C4218A /* StudentCourseListView.swift in Sources */,
+				61C5C7072B0037F500C4218A /* ColorSet.swift in Sources */,
+				61C5C6F92B00365000C4218A /* UserRole.swift in Sources */,
+				61C5C6F52B0035EC00C4218A /* SignInView.swift in Sources */,
+				61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */,
+				61C5C7032B0037AF00C4218A /* SettingsModel.swift in Sources */,
+				61C5C70B2B00384600C4218A /* Tutor.swift in Sources */,
 				61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */,
-				61C5C6C72B0033E900C4218A /* TutorHubbApp.swift in Sources */,
+				61C5C6F32B00359A00C4218A /* TutorHubbApp.swift in Sources */,
+				61C5C6FF2B00376900C4218A /* UserSession.swift in Sources */,
+				61C5C70D2B00387000C4218A /* TutorCalendarView.swift in Sources */,
+				61C5C7092B00381A00C4218A /* TutorListView.swift in Sources */,
+				61C5C7052B0037D100C4218A /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
