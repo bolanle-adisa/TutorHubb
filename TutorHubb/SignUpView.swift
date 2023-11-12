@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct SignUpView: View {
     @State private var username: String = ""
@@ -66,15 +67,28 @@ struct SignUpView: View {
     private func signUpAction() {
         isSigningUp = true
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            DispatchQueue.main.async {
+                   DispatchQueue.main.async {
                 self.isSigningUp = false
                 if let error = error {
                     self.error = error.localizedDescription
-                } else if result?.user != nil {
-                    self.userSession.isLoggedIn = true
-                    self.userSession.userRole = self.userRole
-                    // Optional: Navigate to a different view or perform additional setup.
-                    self.presentationMode.wrappedValue.dismiss()
+                } else if let result = result {
+                    // Save the username in Firestore under the 'users' collection with the UID as the document key
+                    let uid = result.user.uid
+                    Firestore.firestore().collection("users").document(uid).setData([
+                        "username": self.username 
+                    ]) { error in
+                        if let error = error {
+                            // Handle any errors
+                            print("Error saving username: \(error)")
+                        } else {
+                            // Proceed with setting up the user session
+                            self.userSession.isLoggedIn = true
+                            self.userSession.userRole = self.userRole
+                            self.userSession.username = self.username 
+                            self.userSession.email = self.email 
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
                 }
             }
         }

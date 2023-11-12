@@ -19,9 +19,9 @@ struct UserProfileView: View {
                         .resizable()
                         .frame(width: 50, height: 50)
                     VStack(alignment: .leading) {
-                        Text("User Name")
+                        Text(userSession.username)
                             .font(.headline)
-                        Text("user@htu.edu")
+                        Text(userSession.email)
                     }
                 }
                 .padding()

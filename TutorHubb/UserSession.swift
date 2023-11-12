@@ -12,6 +12,8 @@ class UserSession: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var userRole: UserRole? = nil
     @Published var selectedTab: Int = 0
+    @Published var username: String = ""
+    @Published var email: String = ""
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
 
     init() {

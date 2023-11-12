@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 
 struct SignInView: View {
     @State private var email: String = ""
@@ -75,16 +76,24 @@ struct SignInView: View {
     
     private func signInAction() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            // Directly use `self` because SwiftUI manages memory for us
-            if let error = error {
-                // If there's an error, set the error state
-                self.error = error.localizedDescription
-            } else if result?.user != nil {
-                // Successful sign in
-                self.userSession.isLoggedIn = true
-                self.userSession.userRole = self.userRole
-                // Trigger navigation based on role
-                self.navigationTag = self.userRole
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.error = error.localizedDescription
+                } else if let user = result?.user {
+                    // Fetch the username from Firestore
+                    Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            self.userSession.username = document.data()?["username"] as? String ?? ""
+                        } else {
+                            print("Document does not exist")
+                        }
+                        // Continue setting up the user session
+                        self.userSession.isLoggedIn = true
+                        self.userSession.userRole = self.userRole
+                        self.userSession.email = user.email ?? ""
+                        self.navigationTag = self.userRole
+                    }
+                }
             }
         }
     }
