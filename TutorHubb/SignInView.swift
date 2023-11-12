@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var navigationTag: UserRole?
+    @State private var error: String?
     
     let userRole: UserRole
     
@@ -55,6 +57,13 @@ struct SignInView: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
+            
+            // Add this NavigationLink right here
+            NavigationLink(destination: SignUpView(userRole: self.userRole)) {
+                Text("Don't have an account? Sign up")
+                    .foregroundColor(.blue)
+            }
+            .padding()
         }
         .padding()
         .navigationTitle("Sign In")
@@ -65,10 +74,19 @@ struct SignInView: View {
     }
     
     private func signInAction() {
-        // Validate credentials and sign in...
-        // Once validated, update the userSession:
-        userSession.isLoggedIn = true
-        userSession.userRole = self.userRole
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            // Directly use `self` because SwiftUI manages memory for us
+            if let error = error {
+                // If there's an error, set the error state
+                self.error = error.localizedDescription
+            } else if result?.user != nil {
+                // Successful sign in
+                self.userSession.isLoggedIn = true
+                self.userSession.userRole = self.userRole
+                // Trigger navigation based on role
+                self.navigationTag = self.userRole
+            }
+        }
     }
 }
 
@@ -79,13 +97,19 @@ struct CredentialsInput: View {
     var body: some View {
         VStack {
             TextField("Email", text: $email)
-                .padding([.leading, .trailing, .bottom])
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8)
             
             SecureField("Password", text: $password)
-                .padding([.leading, .trailing, .bottom])
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8)
         }
+        .padding(.bottom)
     }
 }
 
