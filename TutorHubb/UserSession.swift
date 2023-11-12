@@ -14,17 +14,18 @@ class UserSession: ObservableObject {
     @Published var selectedTab: Int = 0
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
 
-        init() {
-            authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-                self?.isLoggedIn = user != nil
-                // You might want to handle userRole here as well, if it depends on the user's state
-            }
-        }
-        
-        deinit {
-            // Remember to remove the listener when this object is being deallocated
-            if let authStateDidChangeListenerHandle = authStateDidChangeListenerHandle {
-                Auth.auth().removeStateDidChangeListener(authStateDidChangeListenerHandle)
-            }
+    init() {
+        // The listener has been commented out for the default state to be not logged in
+        // authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+        //     self?.isLoggedIn = user != nil
+        //     // You might want to handle userRole here as well, if it depends on the user's state
+        // }
+    }
+    
+    deinit {
+        // Remember to remove the listener when this object is being deallocated
+        if let authStateDidChangeListenerHandle = authStateDidChangeListenerHandle {
+            Auth.auth().removeStateDidChangeListener(authStateDidChangeListenerHandle)
         }
     }
+}
