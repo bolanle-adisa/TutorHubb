@@ -9,11 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var userSession: UserSession
-    @EnvironmentObject var settings: SettingsModel  // Add this line
+    @EnvironmentObject var settings: SettingsModel
     
     var body: some View {
         TabView(selection: $userSession.selectedTab) {
-            if userSession.isLoggedIn {
+            // The condition has been inverted to check if the user is NOT logged in
+            if !userSession.isLoggedIn {
+                HomeView()
+                    .tag(0)
+            } else {
+                // Logic for when the user is logged in
                 switch userSession.userRole {
                 case .student:
                     StudentCourseListView(courses: sampleCourses, tutors: sampleTutors)
@@ -40,6 +45,7 @@ struct ContentView: View {
                         .tag(0)
                 
                 case .none:
+                    // Consider removing this or handling the no role scenario more gracefully
                     Text("No role assigned")
                         .tag(0)
                 }
@@ -53,19 +59,16 @@ struct ContentView: View {
                 }
                 .tag(1)
                 .environmentObject(settings)
-            } else {
-                HomeView()
-                    .tag(0)
             }
         }
     }
 }
-    
+
 // Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(UserSession())
-            .environmentObject(SettingsModel())  // Add this line
+            .environmentObject(SettingsModel())
     }
 }
