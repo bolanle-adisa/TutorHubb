@@ -15,19 +15,20 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var isSigningUp: Bool = false
     @State private var error: String?
-    
+    @State private var navigateToSignIn = false  // New state variable for navigation control
+
     let userRole: UserRole
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSession: UserSession
-    
+
     var body: some View {
         VStack {
             if let error = error {
                 Text("Error: \(error)")
                     .foregroundColor(.red)
             }
-            
+
             if isSigningUp {
                 ProgressView("Signing Up...")
             } else {
@@ -42,6 +43,10 @@ struct SignUpView: View {
                 }
                 .padding(.horizontal)
             }
+
+            // Hidden NavigationLink to navigate to SignInView
+            NavigationLink("", destination: SignInView(userRole: self.userRole), isActive: $navigateToSignIn)
+                .hidden()
         }
         .padding()
         .navigationTitle("Sign Up")
@@ -50,7 +55,7 @@ struct SignUpView: View {
         .navigationBarItems(leading: backButton)
         .disabled(isSigningUp)
     }
-    
+
     var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -63,30 +68,24 @@ struct SignUpView: View {
             }
         }
     }
-    
+
     private func signUpAction() {
         isSigningUp = true
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                   DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.isSigningUp = false
                 if let error = error {
                     self.error = error.localizedDescription
                 } else if let result = result {
-                    // Save the username in Firestore under the 'users' collection with the UID as the document key
                     let uid = result.user.uid
                     Firestore.firestore().collection("users").document(uid).setData([
-                        "username": self.username 
+                        "username": self.username
                     ]) { error in
                         if let error = error {
-                            // Handle any errors
                             print("Error saving username: \(error)")
                         } else {
-                            // Proceed with setting up the user session
-                            self.userSession.isLoggedIn = true
-                            self.userSession.userRole = self.userRole
-                            self.userSession.username = self.username 
-                            self.userSession.email = self.email 
-                            self.presentationMode.wrappedValue.dismiss()
+                            // Navigate to SignInView after successful sign-up
+                            self.navigateToSignIn = true
                         }
                     }
                 }
@@ -99,7 +98,7 @@ struct CredentialsInput2: View {
     @Binding var username: String
     @Binding var email: String
     @Binding var password: String
-    
+
     var body: some View {
         VStack {
             TextField("Username", text: $username)
@@ -108,7 +107,7 @@ struct CredentialsInput2: View {
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-            
+
             TextField("Email", text: $email)
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
@@ -116,7 +115,7 @@ struct CredentialsInput2: View {
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-            
+
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.secondarySystemBackground))

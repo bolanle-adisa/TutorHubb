@@ -43,18 +43,24 @@ struct TutorCalendarView: View {
             }
 
             Section {
-                NavigationLink(destination: AppointmentDetailsView(tutor: tutor, date: selectedDate, time: selectedTime, userEmail: userSession.email, username: userSession.username), isActive: $navigateToAppointmentDetails) {
-                    Text("Schedule with \(tutor.firstName) \(tutor.lastName)")
-                }
-                .disabled(!isValidSelection())
-                .onTapGesture {
+                Button("Schedule with \(tutor.firstName) \(tutor.lastName)") {
                     showingAlert = true
                 }
+                .disabled(!isValidSelection())
+
+                NavigationLink(destination: AppointmentDetailsView(tutor: tutor, date: selectedDate, time: selectedTime, userEmail: userSession.email, username: userSession.username), isActive: $navigateToAppointmentDetails) {
+                    EmptyView()
+                }
+                .hidden()
+
                 .alert(isPresented: $showingAlert) {
                     Alert(
                         title: Text("Confirm Appointment"),
                         message: Text("Do you want to schedule an appointment with \(tutor.firstName) \(tutor.lastName) on \(dateFormatter.string(from: selectedDate)) at \(timeFormatter.string(from: selectedTime))?"),
                         primaryButton: .default(Text("Yes"), action: {
+                            let newAppointment = Appointment(userId: userSession.userId, tutorName: "\(tutor.firstName) \(tutor.lastName)", date: selectedDate)
+                            userSession.saveAppointment(newAppointment)
+
                             navigateToAppointmentDetails = true
                         }),
                         secondaryButton: .cancel()
