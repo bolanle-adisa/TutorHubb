@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 612DCBA32B018AD900C01996 /* FirebaseStorage */; };
+		613779522B036171000BE8CD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 613779512B036171000BE8CD /* FirebaseFirestoreSwift */; };
 		614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EC2B00591D00017D2A /* FirebaseAuth */; };
 		614B24EF2B00591D00017D2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EE2B00591D00017D2A /* FirebaseFirestore */; };
 		61555CEC2B02CBFC009A99E7 /* MailComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */; };
 		61555CF02B02E87C009A99E7 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CEF2B02E87C009A99E7 /* CalendarManager.swift */; };
+		61555CF22B032F77009A99E7 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CF12B032F77009A99E7 /* Appointment.swift */; };
+		61555CF42B033039009A99E7 /* AppointmentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CF32B033039009A99E7 /* AppointmentsListView.swift */; };
 		61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6C82B0033E900C4218A /* ContentView.swift */; };
 		61C5C6CB2B0033EA00C4218A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CA2B0033EA00C4218A /* Assets.xcassets */; };
 		61C5C6CE2B0033EA00C4218A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CD2B0033EA00C4218A /* Preview Assets.xcassets */; };
@@ -57,6 +60,8 @@
 /* Begin PBXFileReference section */
 		61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerView.swift; sourceTree = "<group>"; };
 		61555CEF2B02E87C009A99E7 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		61555CF12B032F77009A99E7 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
+		61555CF32B033039009A99E7 /* AppointmentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentsListView.swift; sourceTree = "<group>"; };
 		61C5C6C32B0033E900C4218A /* TutorHubb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorHubb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C5C6C82B0033E900C4218A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		61C5C6CA2B0033EA00C4218A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +98,7 @@
 				614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */,
 				614B24EF2B00591D00017D2A /* FirebaseFirestore in Frameworks */,
 				612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */,
+				613779522B036171000BE8CD /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +144,7 @@
 			children = (
 				61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
+				61555CF12B032F77009A99E7 /* Appointment.swift */,
 				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
 				61555CEF2B02E87C009A99E7 /* CalendarManager.swift */,
 				61C5C6F42B0035EC00C4218A /* SignInView.swift */,
@@ -147,6 +154,7 @@
 				61C5C6FA2B00368100C4218A /* StudentCourseListView.swift */,
 				61C5C6FC2B00371E00C4218A /* HomeView.swift */,
 				61C5C6FE2B00376900C4218A /* UserSession.swift */,
+				61555CF32B033039009A99E7 /* AppointmentsListView.swift */,
 				61C5C7002B00378B00C4218A /* UserProfileView.swift */,
 				61C5C7022B0037AF00C4218A /* SettingsModel.swift */,
 				61C5C7042B0037D100C4218A /* SettingsView.swift */,
@@ -207,6 +215,7 @@
 				614B24EC2B00591D00017D2A /* FirebaseAuth */,
 				614B24EE2B00591D00017D2A /* FirebaseFirestore */,
 				612DCBA32B018AD900C01996 /* FirebaseStorage */,
+				613779512B036171000BE8CD /* FirebaseFirestoreSwift */,
 			);
 			productName = TutorHubb;
 			productReference = 61C5C6C32B0033E900C4218A /* TutorHubb.app */;
@@ -330,6 +339,7 @@
 				61C5C7012B00378B00C4218A /* UserProfileView.swift in Sources */,
 				61C5C6FD2B00371E00C4218A /* HomeView.swift in Sources */,
 				61C5C6FB2B00368100C4218A /* StudentCourseListView.swift in Sources */,
+				61555CF42B033039009A99E7 /* AppointmentsListView.swift in Sources */,
 				61C5C7072B0037F500C4218A /* ColorSet.swift in Sources */,
 				61555CF02B02E87C009A99E7 /* CalendarManager.swift in Sources */,
 				61C5C6F92B00365000C4218A /* UserRole.swift in Sources */,
@@ -345,6 +355,7 @@
 				61C5C70D2B00387000C4218A /* TutorCalendarView.swift in Sources */,
 				61C5C7092B00381A00C4218A /* TutorListView.swift in Sources */,
 				61C5C7052B0037D100C4218A /* SettingsView.swift in Sources */,
+				61555CF22B032F77009A99E7 /* Appointment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +701,10 @@
 		612DCBA32B018AD900C01996 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = FirebaseStorage;
+		};
+		613779512B036171000BE8CD /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseFirestoreSwift;
 		};
 		614B24EC2B00591D00017D2A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

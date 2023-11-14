@@ -50,6 +50,12 @@ struct ContentView: View {
                         .tag(0)
                 }
                 
+                AppointmentsListView()
+                                   .tabItem {
+                                       Label("Appointments", systemImage: "calendar")
+                                   }
+                                   .tag(2)
+                
                 NavigationView {
                     UserProfileView()
                 }
