@@ -10,6 +10,8 @@
 		612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 612DCBA32B018AD900C01996 /* FirebaseStorage */; };
 		614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EC2B00591D00017D2A /* FirebaseAuth */; };
 		614B24EF2B00591D00017D2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EE2B00591D00017D2A /* FirebaseFirestore */; };
+		61555CEC2B02CBFC009A99E7 /* MailComposerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */; };
+		61555CF02B02E87C009A99E7 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61555CEF2B02E87C009A99E7 /* CalendarManager.swift */; };
 		61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6C82B0033E900C4218A /* ContentView.swift */; };
 		61C5C6CB2B0033EA00C4218A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CA2B0033EA00C4218A /* Assets.xcassets */; };
 		61C5C6CE2B0033EA00C4218A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61C5C6CD2B0033EA00C4218A /* Preview Assets.xcassets */; };
@@ -53,6 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerView.swift; sourceTree = "<group>"; };
+		61555CEF2B02E87C009A99E7 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		61C5C6C32B0033E900C4218A /* TutorHubb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TutorHubb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61C5C6C82B0033E900C4218A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		61C5C6CA2B0033EA00C4218A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
 				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
+				61555CEF2B02E87C009A99E7 /* CalendarManager.swift */,
 				61C5C6F42B0035EC00C4218A /* SignInView.swift */,
 				61E5CA052B00792700A1FB42 /* SignUpView.swift */,
 				61C5C6F62B00361D00C4218A /* UserRoleSelectionView.swift */,
@@ -150,6 +155,7 @@
 				61C5C70A2B00384600C4218A /* Tutor.swift */,
 				61C5C70C2B00387000C4218A /* TutorCalendarView.swift */,
 				61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */,
+				61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */,
 				61C5C6CA2B0033EA00C4218A /* Assets.xcassets */,
 				61C5C6CC2B0033EA00C4218A /* Preview Content */,
 			);
@@ -325,11 +331,13 @@
 				61C5C6FD2B00371E00C4218A /* HomeView.swift in Sources */,
 				61C5C6FB2B00368100C4218A /* StudentCourseListView.swift in Sources */,
 				61C5C7072B0037F500C4218A /* ColorSet.swift in Sources */,
+				61555CF02B02E87C009A99E7 /* CalendarManager.swift in Sources */,
 				61C5C6F92B00365000C4218A /* UserRole.swift in Sources */,
 				61C5C6F52B0035EC00C4218A /* SignInView.swift in Sources */,
 				61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */,
 				61C5C7032B0037AF00C4218A /* SettingsModel.swift in Sources */,
 				61C5C70B2B00384600C4218A /* Tutor.swift in Sources */,
+				61555CEC2B02CBFC009A99E7 /* MailComposerView.swift in Sources */,
 				61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */,
 				61C5C6F32B00359A00C4218A /* TutorHubbApp.swift in Sources */,
 				61E5CA062B00792700A1FB42 /* SignUpView.swift in Sources */,
