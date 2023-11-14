@@ -12,19 +12,23 @@ struct AppointmentsListView: View {
 
     var body: some View {
         NavigationView {
-            List(userSession.appointments) { appointment in
-                VStack(alignment: .leading) {
-                    Text("Tutor: \(appointment.tutorName)")
-                        .font(.headline)
-                    Text("Date: \(appointment.date, formatter: dateFormatter)")
-                        .font(.subheadline)
+            List {
+                // Wrap your list content in a ForEach to enable onDelete
+                ForEach(userSession.appointments) { appointment in
+                    VStack(alignment: .leading) {
+                        Text("Tutor: \(appointment.tutorName)")
+                            .font(.headline)
+                        Text("Date: \(appointment.date, formatter: dateFormatter)")
+                            .font(.subheadline)
+                    }
                 }
+                .onDelete(perform: delete) // Apply the onDelete here, inside the List
             }
             .navigationTitle("Appointments")
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                userSession.loadAppointments()
-            }
+        }
+        .onAppear {
+            userSession.loadAppointments()
         }
     }
 
@@ -33,6 +37,10 @@ struct AppointmentsListView: View {
         formatter.dateStyle = .long
         formatter.timeStyle = .short
         return formatter
+    }
+    
+    private func delete(at offsets: IndexSet) {
+        userSession.deleteAppointment(at: offsets)
     }
 }
 
