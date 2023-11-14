@@ -7,6 +7,7 @@
 
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 
 class UserSession: ObservableObject {
     @Published var isLoggedIn: Bool = false
@@ -14,20 +15,26 @@ class UserSession: ObservableObject {
     @Published var selectedTab: Int = 0
     @Published var username: String = ""
     @Published var email: String = ""
-    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
-
-    init() {
-        // The listener has been commented out for the default state to be not logged in
-        // authStateDidChangeListenerHandle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-        //     self?.isLoggedIn = user != nil
-        //     // You might want to handle userRole here as well, if it depends on the user's state
-        // }
-    }
+    @Published var userId: String = "" // This will be non-optional and should be set during sign-in
+    @Published var profileImageUrl: String = "" // This will hold the URL of the profile image
     
-    deinit {
-        // Remember to remove the listener when this object is being deallocated
-        if let authStateDidChangeListenerHandle = authStateDidChangeListenerHandle {
-            Auth.auth().removeStateDidChangeListener(authStateDidChangeListenerHandle)
+    var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
+    
+    func fetchProfileImageUrl() {
+            guard !self.userId.isEmpty else {
+                print("User ID is not set")
+                return
+            }
+            
+            let db = Firestore.firestore()
+            db.collection("users").document(self.userId).getDocument { [weak self] document, error in
+                if let document = document, document.exists, let profileImageUrl = document.data()?["profileImageUrl"] as? String {
+                    DispatchQueue.main.async {
+                        self?.profileImageUrl = profileImageUrl
+                    }
+                } else {
+                    print("Document does not exist or error fetching document: \(error?.localizedDescription ?? "unknown error")")
+            }
         }
     }
 }

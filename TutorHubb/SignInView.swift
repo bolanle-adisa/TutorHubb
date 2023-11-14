@@ -87,6 +87,12 @@ struct SignInView: View {
                         } else {
                             print("Document does not exist")
                         }
+                        if let user = result?.user {
+                                       // ... fetch username and other details
+                                       // After successfully setting up the user session, fetch the profile image URL
+                                       userSession.userId = user.uid // Set the userId
+                                       userSession.fetchProfileImageUrl() // Fetch the profile image URL
+                                   }
                         // Continue setting up the user session
                         self.userSession.isLoggedIn = true
                         self.userSession.userRole = self.userRole

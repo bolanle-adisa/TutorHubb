@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 612DCBA32B018AD900C01996 /* FirebaseStorage */; };
 		614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EC2B00591D00017D2A /* FirebaseAuth */; };
 		614B24EF2B00591D00017D2A /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EE2B00591D00017D2A /* FirebaseFirestore */; };
 		61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C6C82B0033E900C4218A /* ContentView.swift */; };
@@ -87,6 +88,7 @@
 			files = (
 				614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */,
 				614B24EF2B00591D00017D2A /* FirebaseFirestore in Frameworks */,
+				612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +200,7 @@
 			packageProductDependencies = (
 				614B24EC2B00591D00017D2A /* FirebaseAuth */,
 				614B24EE2B00591D00017D2A /* FirebaseFirestore */,
+				612DCBA32B018AD900C01996 /* FirebaseStorage */,
 			);
 			productName = TutorHubb;
 			productReference = 61C5C6C32B0033E900C4218A /* TutorHubb.app */;
@@ -676,6 +679,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		612DCBA32B018AD900C01996 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FirebaseStorage;
+		};
 		614B24EC2B00591D00017D2A /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 614B24EB2B00591D00017D2A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
