@@ -26,7 +26,7 @@ struct StudentCourseListView: View {
                     Text(course.name)
                 }
             }
-            .navigationTitle("Courses")
+            //.navigationTitle("Courses")
         }
     }
 }
