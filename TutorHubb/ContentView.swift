@@ -10,63 +10,98 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var userSession: UserSession
     @EnvironmentObject var settings: SettingsModel
-    
+
     var body: some View {
         TabView(selection: $userSession.selectedTab) {
-            // The condition has been inverted to check if the user is NOT logged in
             if !userSession.isLoggedIn {
                 HomeView()
                     .tag(0)
             } else {
-                // Logic for when the user is logged in
                 switch userSession.userRole {
                 case .student:
-                    StudentCourseListView(courses: sampleCourses, tutors: sampleTutors)
-                        .tabItem {
-                            Image(systemName: "book.fill")
-                            Text("Courses")
-                        }
-                        .tag(0)
-                    
+                    studentTabView
                 case .tutor:
-                    TutorDashboardView()
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Dashboard")
-                        }
-                        .tag(0)
-                
-                case .instructor:
-                    InstructorDashboardView()
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Dashboard")
-                        }
-                        .tag(0)
-                
+                    tutorTabView
                 case .none:
-                    // Consider removing this or handling the no role scenario more gracefully
                     Text("No role assigned")
                         .tag(0)
                 }
-                
-                AppointmentsListView()
-                                   .tabItem {
-                                       Label("Appointments", systemImage: "calendar")
-                                   }
-                                   .tag(2)
-                
-                NavigationView {
-                    UserProfileView()
-                }
-                .tabItem {
-                    Image(systemName: "person.crop.circle.fill")
-                    Text("Profile")
-                }
-                .tag(1)
-                .environmentObject(settings)
             }
         }
+    }
+
+    private var studentTabView: some View {
+        Group {
+            NavigationView {
+                StudentCourseListView(courses: sampleCourses, tutors: sampleTutors)
+                    .navigationBarTitle("Courses", displayMode: .inline)
+                    .navigationBarItems(trailing: NavigationLink(destination: MessagingView()) {
+                        Image(systemName: "message")
+                    })
+            }
+            .tabItem {
+                Image(systemName: "book.fill")
+                Text("Courses")
+            }
+            .tag(0)
+
+            NavigationView {
+                AppointmentsListView()
+                    .navigationBarTitle("Appointments", displayMode: .inline)
+                    .navigationBarItems(trailing: NavigationLink(destination: MessagingView()) {
+                        Image(systemName: "message")
+                    })
+            }
+            .tabItem {
+                Label("Appointments", systemImage: "calendar")
+            }
+            .tag(1)
+
+            NavigationView {
+                UserProfileView()
+                    .navigationBarTitle("Profile", displayMode: .inline)
+            }
+            .tabItem {
+                Image(systemName: "person.crop.circle.fill")
+                Text("Profile")
+            }
+            .tag(2)
+            .environmentObject(settings)
+        }
+    }
+
+    private var tutorTabView: some View {
+        Group {
+            NavigationView {
+                AppointmentsListView()
+                    .navigationBarTitle("Appointments", displayMode: .inline)
+                    .navigationBarItems(trailing: NavigationLink(destination: MessagingView()) {
+                        Image(systemName: "message")
+                    })
+            }
+            .tabItem {
+                Label("Appointments", systemImage: "calendar")
+            }
+            .tag(0)
+
+            NavigationView {
+                UserProfileView()
+                    .navigationBarTitle("Profile", displayMode: .inline)
+            }
+            .tabItem {
+                Image(systemName: "person.crop.circle.fill")
+                Text("Profile")
+            }
+            .tag(1)
+            .environmentObject(settings)
+        }
+    }
+}
+
+// Placeholder for MessagingView
+struct MessagingView: View {
+    var body: some View {
+        Text("In-app messaging system to be implemented")
     }
 }
 

@@ -33,7 +33,7 @@ struct AppointmentsListView: View {
                 }
                 .onDelete(perform: delete)
             }
-            .navigationTitle("Appointments")
+            //.navigationTitle("Appointments")
             .navigationBarTitleDisplayMode(.inline)
             .actionSheet(isPresented: $showingActionSheet) {
                 actionSheet

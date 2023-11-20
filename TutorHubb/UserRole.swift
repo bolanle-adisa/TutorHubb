@@ -8,5 +8,5 @@
 enum UserRole {
     case student
     case tutor
-    case instructor
+    //case instructor
 }
