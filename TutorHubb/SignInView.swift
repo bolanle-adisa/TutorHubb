@@ -5,13 +5,6 @@
 //  Created by Bolanle Adisa on 11/11/23.
 //
 
-//
-//  SignInView.swift
-//  TutorHubb
-//
-//  Created by Bolanle Adisa on 11/11/23.
-//
-
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
@@ -21,9 +14,9 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var navigationTag: UserRole?
     @State private var error: String?
-    
+
     let userRole: UserRole
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSession: UserSession
 
@@ -36,7 +29,6 @@ struct SignInView: View {
         }
     }
 
-    
     var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -53,7 +45,13 @@ struct SignInView: View {
     var body: some View {
         VStack {
             CredentialsInput(email: $email, password: $password)
-            
+
+            if let error = error {
+                Text(error)
+                    .foregroundColor(.red)
+                    .padding()
+            }
+
             Button(action: signInAction) {
                 Text("Sign In")
                     .frame(maxWidth: .infinity)
@@ -63,8 +61,7 @@ struct SignInView: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
-            
-            // Add this NavigationLink right here
+
             NavigationLink(destination: SignUpView(userRole: self.userRole)) {
                 Text("Don't have an account? Sign up")
                     .foregroundColor(.blue)
@@ -78,30 +75,46 @@ struct SignInView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }
-    
+
     private func signInAction() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
                 if let error = error {
                     self.error = error.localizedDescription
-                } else if let user = result?.user {
-                    // Fetch the username from Firestore
-                    Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            self.userSession.username = document.data()?["username"] as? String ?? ""
-                        } else {
-                            print("Document does not exist")
-                        }
-                        if let user = result?.user {
-                                       userSession.userId = user.uid // Set the userId
-                                       userSession.fetchProfileImageUrl() // Fetch the profile image URL
-                                   }
-                        // Continue setting up the user session
-                        self.userSession.isLoggedIn = true
-                        self.userSession.userRole = self.userRole
-                        self.userSession.email = user.email ?? ""
-                        self.navigationTag = self.userRole
+                    return
+                }
+                
+                guard let user = result?.user else {
+                    self.error = "Authentication failed."
+                    return
+                }
+
+                if self.userRole == .tutor {
+                    // Verify if user is a tutor
+                    let emailLowercased = self.email.lowercased()
+                    let isTutor = sampleTutors.contains { tutor in
+                        emailLowercased.contains(tutor.firstName.lowercased()) || emailLowercased.contains(tutor.lastName.lowercased())
                     }
+
+                    if !isTutor {
+                        self.error = "Access denied. Only registered tutors can sign in as a tutor."
+                        return
+                    }
+                }
+
+                // Fetch the username from Firestore
+                Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        self.userSession.username = document.data()?["username"] as? String ?? ""
+                    } else {
+                        self.error = "Document does not exist"
+                    }
+                    // Set the user session details
+                    self.userSession.isLoggedIn = true
+                    self.userSession.userRole = self.userRole
+                    self.userSession.email = user.email ?? ""
+                    self.userSession.userId = user.uid
+                    self.navigationTag = self.userRole
                 }
             }
         }
@@ -111,7 +124,7 @@ struct SignInView: View {
 struct CredentialsInput: View {
     @Binding var email: String
     @Binding var password: String
-    
+
     var body: some View {
         VStack {
             TextField("Email", text: $email)
@@ -121,7 +134,7 @@ struct CredentialsInput: View {
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-            
+
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.secondarySystemBackground))
@@ -137,6 +150,7 @@ struct SignInView_Previews: PreviewProvider {
             .environmentObject(UserSession())
     }
 }
+
 
 // Sample Data and other views remain the same.
 

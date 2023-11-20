@@ -59,7 +59,7 @@ struct ContentView: View {
 
             NavigationView {
                 UserProfileView()
-                    .navigationBarTitle("Profile", displayMode: .inline)
+                    //.navigationBarTitle("Profile", displayMode: .inline)
             }
             .tabItem {
                 Image(systemName: "person.crop.circle.fill")
@@ -86,7 +86,7 @@ struct ContentView: View {
 
             NavigationView {
                 UserProfileView()
-                    .navigationBarTitle("Profile", displayMode: .inline)
+                    //.navigationBarTitle("Profile", displayMode: .inline)
             }
             .tabItem {
                 Image(systemName: "person.crop.circle.fill")
