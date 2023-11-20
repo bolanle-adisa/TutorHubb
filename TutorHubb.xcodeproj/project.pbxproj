@@ -36,6 +36,7 @@
 		61C5C70B2B00384600C4218A /* Tutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70A2B00384600C4218A /* Tutor.swift */; };
 		61C5C70D2B00387000C4218A /* TutorCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70C2B00387000C4218A /* TutorCalendarView.swift */; };
 		61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */; };
+		61DC2DB12B0B825B00DA396B /* TutorAppointmentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DC2DB02B0B825B00DA396B /* TutorAppointmentsListView.swift */; };
 		61E5CA042B006BE400A1FB42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */; };
 		61E5CA062B00792700A1FB42 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E5CA052B00792700A1FB42 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		61C5C70A2B00384600C4218A /* Tutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutor.swift; sourceTree = "<group>"; };
 		61C5C70C2B00387000C4218A /* TutorCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorCalendarView.swift; sourceTree = "<group>"; };
 		61C5C70E2B00389100C4218A /* AppointmentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentDetailsView.swift; sourceTree = "<group>"; };
+		61DC2DB02B0B825B00DA396B /* TutorAppointmentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorAppointmentsListView.swift; sourceTree = "<group>"; };
 		61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61E5CA052B00792700A1FB42 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,6 +146,7 @@
 			children = (
 				61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
+				61DC2DB02B0B825B00DA396B /* TutorAppointmentsListView.swift */,
 				61555CF12B032F77009A99E7 /* Appointment.swift */,
 				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
 				61555CEF2B02E87C009A99E7 /* CalendarManager.swift */,
@@ -348,6 +351,7 @@
 				61C5C7032B0037AF00C4218A /* SettingsModel.swift in Sources */,
 				61C5C70B2B00384600C4218A /* Tutor.swift in Sources */,
 				61555CEC2B02CBFC009A99E7 /* MailComposerView.swift in Sources */,
+				61DC2DB12B0B825B00DA396B /* TutorAppointmentsListView.swift in Sources */,
 				61C5C6C92B0033E900C4218A /* ContentView.swift in Sources */,
 				61C5C6F32B00359A00C4218A /* TutorHubbApp.swift in Sources */,
 				61E5CA062B00792700A1FB42 /* SignUpView.swift in Sources */,

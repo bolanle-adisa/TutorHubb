@@ -18,21 +18,22 @@ class UserSession: ObservableObject {
     @Published var userId: String = ""
     @Published var profileImageUrl: String = ""
     @Published var appointments: [Appointment] = []
-
+    @Published var tutorFirstName: String = ""
+    
     private var db = Firestore.firestore()
     var authStateDidChangeListenerHandle: AuthStateDidChangeListenerHandle?
-
+    
     init() {
         // Perform initial setup
         loadAppointments()
     }
-
+    
     func fetchProfileImageUrl() {
         guard !self.userId.isEmpty else {
             print("User ID is not set")
             return
         }
-
+        
         db.collection("users").document(self.userId).getDocument { [weak self] document, error in
             if let document = document, document.exists, let profileImageUrl = document.data()?["profileImageUrl"] as? String {
                 DispatchQueue.main.async {
@@ -43,30 +44,30 @@ class UserSession: ObservableObject {
             }
         }
     }
-
+    
     func saveAppointment(_ appointment: Appointment) {
         guard !userId.isEmpty else {
             print("User ID is not set")
             return
         }
-
+        
         var newAppointment = appointment
         newAppointment.userId = self.userId  // Set the userId for the appointment
-
+        
         do {
             try db.collection("users").document(userId).collection("appointments").addDocument(from: newAppointment)
         } catch let error {
             print("Error saving appointment: \(error)")
         }
     }
-
+    
     func loadAppointments() {
         guard !self.userId.isEmpty else {
             print("User ID is not set")
             self.appointments = []  // Clear appointments if no user
             return
         }
-
+        
         db.collection("users").document(self.userId).collection("appointments").getDocuments { [weak self] (snapshot, error) in
             guard let self = self, let documents = snapshot?.documents else {
                 print("Error fetching documents: \(error?.localizedDescription ?? "unknown error")")
@@ -77,11 +78,11 @@ class UserSession: ObservableObject {
             }
         }
     }
-
+    
     func deleteAppointment(at indexSet: IndexSet) {
         // Get the appointment IDs that need to be deleted
         let appointmentIds = indexSet.compactMap { self.appointments[$0].id }
-
+        
         // Loop over each ID and delete the corresponding appointment from Firestore
         for appointmentId in appointmentIds {
             db.collection("users").document(self.userId).collection("appointments").document(appointmentId).delete { error in
@@ -92,10 +93,17 @@ class UserSession: ObservableObject {
                 }
             }
         }
-
+        
         // Delete the appointments from the local array
         DispatchQueue.main.async {
             self.appointments.remove(atOffsets: indexSet)
         }
     }
+    
+    func setTutorFirstName() {
+           let emailLowercased = self.email.lowercased()
+           self.tutorFirstName = sampleTutors.first { tutor in
+               emailLowercased.contains(tutor.firstName.lowercased()) || emailLowercased.contains(tutor.lastName.lowercased())
+           }?.firstName ?? ""
+       }
 }
