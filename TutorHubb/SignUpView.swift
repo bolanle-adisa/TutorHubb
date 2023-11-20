@@ -15,7 +15,7 @@ struct SignUpView: View {
     @State private var password: String = ""
     @State private var isSigningUp: Bool = false
     @State private var error: String?
-    @State private var navigateToSignIn = false  // New state variable for navigation control
+    @State private var navigateToSignIn = false
 
     let userRole: UserRole
 
@@ -25,8 +25,9 @@ struct SignUpView: View {
     var body: some View {
         VStack {
             if let error = error {
-                Text("Error: \(error)")
+                Text(customErrorMessage(error))
                     .foregroundColor(.red)
+                    .padding()
             }
 
             if isSigningUp {
@@ -44,7 +45,6 @@ struct SignUpView: View {
                 .padding(.horizontal)
             }
 
-            // Hidden NavigationLink to navigate to SignInView
             NavigationLink("", destination: SignInView(userRole: self.userRole), isActive: $navigateToSignIn)
                 .hidden()
         }
@@ -82,14 +82,27 @@ struct SignUpView: View {
                         "username": self.username
                     ]) { error in
                         if let error = error {
-                            print("Error saving username: \(error)")
+                            self.error = "Failed to save user data: \(error.localizedDescription)"
                         } else {
-                            // Navigate to SignInView after successful sign-up
                             self.navigateToSignIn = true
                         }
                     }
                 }
             }
+        }
+    }
+
+    // Custom error message function
+    private func customErrorMessage(_ error: String) -> String {
+        // Customize this function based on specific errors
+        if error.contains("network error") {
+            return "Network error. Please check your connection."
+        } else if error.contains("weak password") {
+            return "Your password is too weak. Please choose a stronger one."
+        } else if error.contains("email already in use") {
+            return "This email is already in use. Please use a different email."
+        } else {
+            return "Error: \(error)"
         }
     }
 }

@@ -28,14 +28,14 @@ struct UserRoleSelectionView: View {
                     .cornerRadius(10)
             }
             
-            NavigationLink(destination: SignInView(userRole: .instructor)) {
-                Text("Instructor")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.purple)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
+//            NavigationLink(destination: SignInView(userRole: .instructor)) {
+//                Text("Instructor")
+//                    .frame(maxWidth: .infinity)
+//                    .padding()
+//                    .background(Color.purple)
+//                    .foregroundColor(.white)
+//                    .cornerRadius(10)
+//            }
         }
         .padding(.horizontal)
         .navigationTitle("Select Your Role")
