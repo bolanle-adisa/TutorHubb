@@ -14,9 +14,9 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var navigationTag: UserRole?
     @State private var error: String?
-    
+
     let userRole: UserRole
-    
+
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSession: UserSession
 
@@ -31,7 +31,6 @@ struct SignInView: View {
         }
     }
 
-    
     var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -44,11 +43,17 @@ struct SignInView: View {
             }
         }
     }
-    
+
     var body: some View {
         VStack {
             CredentialsInput(email: $email, password: $password)
-            
+
+            if let error = error {
+                Text(customErrorMessage(error))
+                    .foregroundColor(.red)
+                    .padding()
+            }
+
             Button(action: signInAction) {
                 Text("Sign In")
                     .frame(maxWidth: .infinity)
@@ -58,8 +63,7 @@ struct SignInView: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
-            
-            // Add this NavigationLink right here
+
             NavigationLink(destination: SignUpView(userRole: self.userRole)) {
                 Text("Don't have an account? Sign up")
                     .foregroundColor(.blue)
@@ -73,34 +77,30 @@ struct SignInView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }
-    
+
     private func signInAction() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
                 if let error = error {
                     self.error = error.localizedDescription
                 } else if let user = result?.user {
-                    // Fetch the username from Firestore
-                    Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            self.userSession.username = document.data()?["username"] as? String ?? ""
-                        } else {
-                            print("Document does not exist")
-                        }
-                        if let user = result?.user {
-                                       // ... fetch username and other details
-                                       // After successfully setting up the user session, fetch the profile image URL
-                                       userSession.userId = user.uid // Set the userId
-                                       userSession.fetchProfileImageUrl() // Fetch the profile image URL
-                                   }
-                        // Continue setting up the user session
-                        self.userSession.isLoggedIn = true
-                        self.userSession.userRole = self.userRole
-                        self.userSession.email = user.email ?? ""
-                        self.navigationTag = self.userRole
-                    }
+                    // Additional logic to handle user session
                 }
             }
+        }
+    }
+
+    // Custom error message function
+    private func customErrorMessage(_ error: String) -> String {
+        // Customize this function based on specific errors
+        if error.contains("network error") {
+            return "Network error. Please check your connection."
+        } else if error.contains("wrong password") {
+            return "Incorrect password. Please try again."
+        } else if error.contains("user not found") {
+            return "No account found with this email. Please sign up."
+        } else {
+            return "Error: \(error)"
         }
     }
 }
@@ -108,7 +108,7 @@ struct SignInView: View {
 struct CredentialsInput: View {
     @Binding var email: String
     @Binding var password: String
-    
+
     var body: some View {
         VStack {
             TextField("Email", text: $email)
@@ -118,7 +118,7 @@ struct CredentialsInput: View {
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(8)
-            
+
             SecureField("Password", text: $password)
                 .padding()
                 .background(Color(.secondarySystemBackground))
@@ -134,8 +134,6 @@ struct SignInView_Previews: PreviewProvider {
             .environmentObject(UserSession())
     }
 }
-
-// Sample Data and other views remain the same.
 
 
 // Sample Data
