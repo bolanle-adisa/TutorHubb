@@ -14,7 +14,7 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var navigationTag: UserRole?
     @State private var error: String?
-    
+        
     let userRole: UserRole
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -77,17 +77,29 @@ struct SignInView: View {
     }
     
     private func signInAction() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self.error = error.localizedDescription
-                    return
-                }
-                
-                guard let user = result?.user else {
-                    self.error = "Authentication failed."
-                    return
-                }
+            Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.error = error.localizedDescription
+                        return
+                    }
+
+                    guard let user = result?.user else {
+                        self.error = "Authentication failed."
+                        return
+                    }
+
+                    if self.userRole == .tutor {
+                        let emailLowercased = self.email.lowercased()
+                        let isTutor = sampleTutors.contains { tutor in
+                            emailLowercased.contains(tutor.firstName.lowercased()) || emailLowercased.contains(tutor.lastName.lowercased())
+                        }
+
+                        if !isTutor {
+                            self.error = "Access denied. Only registered tutors can sign in as a tutor."
+                            return
+                        }
+                    }
                 
                 // Fetch the username from Firestore
                 Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
