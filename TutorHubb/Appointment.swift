@@ -12,6 +12,7 @@ struct Appointment: Codable, Identifiable {
     @DocumentID var id: String?
     var userId: String?
     var tutorName: String
+    var studentUsername: String?
     var date: Date
     // Include other relevant details
 }

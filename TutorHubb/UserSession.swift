@@ -73,11 +73,36 @@ class UserSession: ObservableObject {
                 print("Error fetching documents: \(error?.localizedDescription ?? "unknown error")")
                 return
             }
-            self.appointments = documents.compactMap { document -> Appointment? in
-                try? document.data(as: Appointment.self)
+            
+            var loadedAppointments = [Appointment]()
+            
+            for document in documents {
+                if let appointment = try? document.data(as: Appointment.self) {
+                    // Check if we have a userId to fetch the username for
+                    if let userId = appointment.userId {
+                        self.db.collection("users").document(userId).getDocument { (userDocumentSnapshot, error) in
+                            var appointmentWithUsername = appointment
+                            // Fetch username and update the appointment
+                            if let userDocument = userDocumentSnapshot, userDocument.exists {
+                                appointmentWithUsername.studentUsername = userDocument.get("username") as? String
+                            } else {
+                                appointmentWithUsername.studentUsername = "Unknown"
+                            }
+                            // Append the appointment to the loadedAppointments array
+                            loadedAppointments.append(appointmentWithUsername)
+                            // If this was the last appointment to load, update the state
+                            if loadedAppointments.count == documents.count {
+                                DispatchQueue.main.async {
+                                    self.appointments = loadedAppointments
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
+
     
     func deleteAppointment(at indexSet: IndexSet) {
         // Get the appointment IDs that need to be deleted

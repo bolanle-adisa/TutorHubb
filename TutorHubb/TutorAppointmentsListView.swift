@@ -12,21 +12,25 @@ struct TutorAppointmentsListView: View {
     @EnvironmentObject var userSession: UserSession
 
     var body: some View {
-        List {
-            // Use userSession.tutorFirstName to filter appointments
-            ForEach(userSession.appointments.filter {
-                $0.tutorName.lowercased().contains(userSession.tutorFirstName.lowercased())
-            }) { appointment in
-                VStack(alignment: .leading) {
-                    Text("Student ID: \(appointment.userId ?? "Unknown")")
-                        .font(.headline)
-                    Text("Date: \(appointment.date, formatter: Self.dateFormatter)")
-                        .font(.subheadline)
+            List {
+                ForEach(userSession.appointments.filter {
+                    $0.tutorName.lowercased().contains(userSession.tutorFirstName.lowercased())
+                }) { appointment in
+                    VStack(alignment: .leading) {
+                        if let studentUsername = appointment.studentUsername {
+                            Text("Student: \(studentUsername)")
+                                .font(.headline)
+                        } else {
+                            Text("Student ID: \(appointment.userId ?? "Unknown")")
+                                .font(.headline)
+                        }
+                        Text("Date: \(appointment.date, formatter: Self.dateFormatter)")
+                            .font(.subheadline)
+                    }
                 }
             }
+            .navigationTitle("My Appointments")
         }
-        .navigationTitle("My Appointments")
-    }
 
     static var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
