@@ -11,13 +11,13 @@ import FirebaseFirestore
 
 struct UserProfileView: View {
     @EnvironmentObject var userSession: UserSession
-    @EnvironmentObject var settings: SettingsModel // Ensure this is provided to the view
+    @EnvironmentObject var settings: SettingsModel
     @State private var isImagePickerPresented = false
     @State private var profileImage: UIImage?
 
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
+        ScrollView {
+            VStack(alignment: .center, spacing: 20) {
                 Button(action: {
                     isImagePickerPresented = true
                 }) {
@@ -25,48 +25,57 @@ struct UserProfileView: View {
                         Image(uiImage: profileImage)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 120, height: 120)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                    } else if !userSession.profileImageUrl.isEmpty, let url = URL(string: userSession.profileImageUrl), let imageData = try? Data(contentsOf: url), let uiImage = UIImage(data: imageData) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 120, height: 120)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color.white, lineWidth: 4))
                     } else {
                         Image(systemName: "person.crop.circle")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 120, height: 120)
                             .overlay(Circle().stroke(Color.white, lineWidth: 4))
                     }
                 }
+
                 .sheet(isPresented: $isImagePickerPresented, onDismiss: uploadProfileImage) {
                     PhotoPicker(image: $profileImage)
                 }
+                .padding(.top, 40)
 
-                VStack(alignment: .leading) {
-                    Text(userSession.username)
-                        .font(.headline)
-                    Text(userSession.email)
+                Text(userSession.username)
+                    .font(.title)
+                    .fontWeight(.bold)
+
+                Text(userSession.email)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 20)
+
+                NavigationLink(destination: SettingsView(settings: settings)) {
+                    ProfileOption(title: "Settings", iconName: "gear")
                 }
                 .padding()
 
                 Button(action: logoutAction) {
                     Text("Logout")
-                        .foregroundColor(.red)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        .cornerRadius(10)
                 }
                 .padding()
-
-                NavigationLink(destination: SettingsView(settings: settings)) {
-                    Text("Settings")
-                }
-                .padding()
-
-                Spacer()
             }
-            .onAppear {
-                            // If the user is logged in and the userId is set, try to fetch their profile image URL
-                            if userSession.isLoggedIn && !userSession.userId.isEmpty {
-                                userSession.fetchProfileImageUrl()
-                            }
-                        }
+            .padding(.horizontal)
         }
+        .navigationBarTitle("Profile", displayMode: .inline)
     }
 
     func uploadProfileImage() {
@@ -120,9 +129,25 @@ struct UserProfileView: View {
         userSession.selectedTab = 0
         // Perform additional logout if necessary, such as revoking tokens, etc.
     }
+
+    private func ProfileOption(title: String, iconName: String) -> some View {
+        HStack {
+            Image(systemName: iconName)
+                .foregroundColor(.blue)
+                .frame(width: 30, height: 30)
+            Text(title)
+                .foregroundColor(.black)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 3)
+    }
 }
 
-// Define the PhotoPicker struct here
 struct PhotoPicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
 
@@ -168,6 +193,6 @@ struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         let userSession = UserSession()
         let settingsModel = SettingsModel()
-        return UserProfileView().environmentObject(UserSession()).environmentObject(settingsModel)
+        return UserProfileView().environmentObject(userSession).environmentObject(settingsModel)
     }
 }
