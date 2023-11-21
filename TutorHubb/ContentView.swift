@@ -71,32 +71,32 @@ struct ContentView: View {
     }
 
     private var tutorTabView: some View {
-        Group {
-            NavigationView {
-                AppointmentsListView()
-                    .navigationBarTitle("Appointments", displayMode: .inline)
-                    .navigationBarItems(trailing: NavigationLink(destination: MessagingView()) {
-                        Image(systemName: "message")
-                    })
-            }
-            .tabItem {
-                Label("Appointments", systemImage: "calendar")
-            }
-            .tag(0)
+            Group {
+                NavigationView {
+                    TutorAppointmentsListView()  // No longer passing tutorName
+                        .navigationBarTitle("Appointments", displayMode: .inline)
+                        .navigationBarItems(trailing: NavigationLink(destination: MessagingView()) {
+                            Image(systemName: "message")
+                        })
+                }
+                .tabItem {
+                    Label("Appointments", systemImage: "calendar")
+                }
+                .tag(0)
 
-            NavigationView {
-                UserProfileView()
-                    //.navigationBarTitle("Profile", displayMode: .inline)
+                NavigationView {
+                    UserProfileView()
+                        //.navigationBarTitle("Profile", displayMode: .inline)
+                }
+                .tabItem {
+                    Image(systemName: "person.crop.circle.fill")
+                    Text("Profile")
+                }
+                .tag(1)
+                .environmentObject(settings)
             }
-            .tabItem {
-                Image(systemName: "person.crop.circle.fill")
-                Text("Profile")
-            }
-            .tag(1)
-            .environmentObject(settings)
         }
     }
-}
 
 // Placeholder for MessagingView
 struct MessagingView: View {

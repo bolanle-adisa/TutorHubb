@@ -9,36 +9,33 @@ import SwiftUI
 
 struct UserRoleSelectionView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            NavigationLink(destination: SignInView(userRole: .student)) {
-                Text("Student")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+        ZStack {
+            // Maroon background
+            Color(red: 110 / 255, green: 49 / 255, blue: 44 / 255)
+                .edgesIgnoringSafeArea(.all)
+
+            VStack(spacing: 20) {
+                NavigationLink(destination: SignInView(userRole: .student)) {
+                    Text("Student")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255)) // Gold color
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                }
+
+                NavigationLink(destination: SignInView(userRole: .tutor)) {
+                    Text("Tutor")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255)) // Gold color
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                }
             }
-            
-            NavigationLink(destination: SignInView(userRole: .tutor)) {
-                Text("Tutor")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            
-//            NavigationLink(destination: SignInView(userRole: .instructor)) {
-//                Text("Instructor")
-//                    .frame(maxWidth: .infinity)
-//                    .padding()
-//                    .background(Color.purple)
-//                    .foregroundColor(.white)
-//                    .cornerRadius(10)
-//            }
+            .padding(.horizontal)
+            .navigationTitle("Select Your Role")
         }
-        .padding(.horizontal)
-        .navigationTitle("Select Your Role")
     }
 }
 
