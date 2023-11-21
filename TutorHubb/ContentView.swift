@@ -98,13 +98,6 @@ struct ContentView: View {
         }
     }
 
-// Placeholder for MessagingView
-struct MessagingView: View {
-    var body: some View {
-        Text("In-app messaging system to be implemented")
-    }
-}
-
 // Preview
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

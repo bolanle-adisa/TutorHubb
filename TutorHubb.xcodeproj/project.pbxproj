@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6109FC2E2B0CE33700999513 /* MessagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6109FC2D2B0CE33700999513 /* MessagingView.swift */; };
 		612DCBA42B018AD900C01996 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 612DCBA32B018AD900C01996 /* FirebaseStorage */; };
 		613779522B036171000BE8CD /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 613779512B036171000BE8CD /* FirebaseFirestoreSwift */; };
 		614B24ED2B00591D00017D2A /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 614B24EC2B00591D00017D2A /* FirebaseAuth */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6109FC2D2B0CE33700999513 /* MessagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingView.swift; sourceTree = "<group>"; };
 		61555CEB2B02CBFC009A99E7 /* MailComposerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposerView.swift; sourceTree = "<group>"; };
 		61555CEF2B02E87C009A99E7 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		61555CF12B032F77009A99E7 /* Appointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appointment.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				61E5CA032B006BE400A1FB42 /* GoogleService-Info.plist */,
 				61C5C6C82B0033E900C4218A /* ContentView.swift */,
+				6109FC2D2B0CE33700999513 /* MessagingView.swift */,
 				61DC2DB02B0B825B00DA396B /* TutorAppointmentsListView.swift */,
 				61555CF12B032F77009A99E7 /* Appointment.swift */,
 				61C5C6F22B00359A00C4218A /* TutorHubbApp.swift */,
@@ -345,6 +348,7 @@
 				61555CF42B033039009A99E7 /* AppointmentsListView.swift in Sources */,
 				61C5C7072B0037F500C4218A /* ColorSet.swift in Sources */,
 				61555CF02B02E87C009A99E7 /* CalendarManager.swift in Sources */,
+				6109FC2E2B0CE33700999513 /* MessagingView.swift in Sources */,
 				61C5C6F92B00365000C4218A /* UserRole.swift in Sources */,
 				61C5C6F52B0035EC00C4218A /* SignInView.swift in Sources */,
 				61C5C70F2B00389100C4218A /* AppointmentDetailsView.swift in Sources */,
