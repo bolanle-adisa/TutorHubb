@@ -14,12 +14,12 @@ struct SignInView: View {
     @State private var password: String = ""
     @State private var navigationTag: UserRole?
     @State private var error: String?
-
+    
     let userRole: UserRole
-
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userSession: UserSession
-
+    
     var navigationLink: some View {
         switch userRole {
         case .student:
@@ -28,7 +28,7 @@ struct SignInView: View {
             return AnyView(NavigationLink("", destination: TutorDashboardView(), tag: .tutor, selection: $navigationTag).hidden())
         }
     }
-
+    
     var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -45,13 +45,13 @@ struct SignInView: View {
     var body: some View {
         VStack {
             CredentialsInput(email: $email, password: $password)
-
+            
             if let error = error {
                 Text(error)
                     .foregroundColor(.red)
                     .padding()
             }
-
+            
             Button(action: signInAction) {
                 Text("Sign In")
                     .frame(maxWidth: .infinity)
@@ -61,7 +61,7 @@ struct SignInView: View {
                     .cornerRadius(10)
             }
             .padding(.horizontal)
-
+            
             NavigationLink(destination: SignUpView(userRole: self.userRole)) {
                 Text("Don't have an account? Sign up")
                     .foregroundColor(.blue)
@@ -75,7 +75,7 @@ struct SignInView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
     }
-
+    
     private func signInAction() {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             DispatchQueue.main.async {
@@ -88,20 +88,7 @@ struct SignInView: View {
                     self.error = "Authentication failed."
                     return
                 }
-
-                if self.userRole == .tutor {
-                    // Verify if user is a tutor
-                    let emailLowercased = self.email.lowercased()
-                    let isTutor = sampleTutors.contains { tutor in
-                        emailLowercased.contains(tutor.firstName.lowercased()) || emailLowercased.contains(tutor.lastName.lowercased())
-                    }
-
-                    if !isTutor {
-                        self.error = "Access denied. Only registered tutors can sign in as a tutor."
-                        return
-                    }
-                }
-
+                
                 // Fetch the username from Firestore
                 Firestore.firestore().collection("users").document(user.uid).getDocument { (document, error) in
                     if let document = document, document.exists {
@@ -109,11 +96,18 @@ struct SignInView: View {
                     } else {
                         self.error = "Document does not exist"
                     }
+                    
                     // Set the user session details
                     self.userSession.isLoggedIn = true
                     self.userSession.userRole = self.userRole
                     self.userSession.email = user.email ?? ""
                     self.userSession.userId = user.uid
+                    
+                    if self.userRole == .tutor {
+                        // Set the tutor's first name if user is a tutor
+                        self.userSession.setTutorFirstName()
+                    }
+                    
                     self.navigationTag = self.userRole
                 }
             }
@@ -188,9 +182,3 @@ struct TutorDashboardView: View {
     }
 }
 
-struct InstructorDashboardView: View {
-    var body: some View {
-        Text("Instructor Dashboard")
-            .navigationTitle("Dashboard")
-    }
-}
