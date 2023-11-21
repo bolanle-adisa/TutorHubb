@@ -43,39 +43,43 @@ struct SignInView: View {
     }
     
     var body: some View {
-        VStack {
-            CredentialsInput(email: $email, password: $password)
-            
-            if let error = error {
-                Text(error)
-                    .foregroundColor(.red)
-                    .padding()
-            }
-            
-            Button(action: signInAction) {
-                Text("Sign In")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
-            
-            NavigationLink(destination: SignUpView(userRole: self.userRole)) {
-                Text("Don't have an account? Sign up")
-                    .foregroundColor(.blue)
+        ZStack {
+            // Maroon color for background
+            Color(red: 110 / 255, green: 49 / 255, blue: 44 / 255)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                CredentialsInput(email: $email, password: $password)
+                
+                if let error = error {
+                    Text(error)
+                        .foregroundColor(.red)
+                        .padding()
+                }
+                
+                Button(action: signInAction) {
+                    Text("Sign In")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255)) // Gold color for button
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal)
+                
+                NavigationLink(destination: SignUpView(userRole: self.userRole)) {
+                    Text("Don't have an account? Sign up")
+                        .foregroundColor(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255))
+                }
+                .padding()
             }
             .padding()
+            .navigationTitle("Sign In")
+            .navigationBarTitleDisplayMode(.inline)
+            .background(navigationLink)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
         }
-        .padding()
-        .navigationTitle("Sign In")
-        .navigationBarTitleDisplayMode(.inline)
-        .background(navigationLink)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
     }
-    
     private func signInAction() {
             Auth.auth().signIn(withEmail: email, password: password) { result, error in
                 DispatchQueue.main.async {

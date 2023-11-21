@@ -14,7 +14,7 @@ struct HomeView: View {
                 Spacer()
                 Text("TutorHub")
                     .font(.system(size: 60, weight: .black, design: .rounded)) // Increase font size, set weight and design
-                    .foregroundColor(.black) // Set text color to black
+                    .foregroundColor(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255)) // Set text color to black
                     .shadow(color: .gray, radius: 2, x: 0, y: 5) // Add shadow for depth
                     .padding(.bottom, 40)
                 NavigationLink(destination: UserRoleSelectionView()) {

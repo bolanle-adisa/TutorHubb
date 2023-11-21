@@ -23,37 +23,42 @@ struct SignUpView: View {
     @EnvironmentObject var userSession: UserSession
 
     var body: some View {
-        VStack {
-            if let error = error {
-                Text(customErrorMessage(error))
-                    .foregroundColor(.red)
-                    .padding()
-            }
-
-            if isSigningUp {
-                ProgressView("Signing Up...")
-            } else {
-                CredentialsInput2(username: $username, email: $email, password: $password)
-                Button(action: signUpAction) {
-                    Text("Sign Up")
-                        .frame(maxWidth: .infinity)
+        ZStack {
+            // Maroon color for background
+            Color(red: 110 / 255, green: 49 / 255, blue: 44 / 255)
+                .edgesIgnoringSafeArea(.all)
+            VStack {
+                if let error = error {
+                    Text(customErrorMessage(error))
+                        .foregroundColor(.red)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
                 }
-                .padding(.horizontal)
+                
+                if isSigningUp {
+                    ProgressView("Signing Up...")
+                } else {
+                    CredentialsInput2(username: $username, email: $email, password: $password)
+                    Button(action: signUpAction) {
+                        Text("Sign Up")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 246 / 255, green: 206 / 255, blue: 72 / 255)) // Gold color for button
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    .padding(.horizontal)
+                }
+                
+                NavigationLink("", destination: SignInView(userRole: self.userRole), isActive: $navigateToSignIn)
+                    .hidden()
             }
-
-            NavigationLink("", destination: SignInView(userRole: self.userRole), isActive: $navigateToSignIn)
-                .hidden()
+            .padding()
+            .navigationTitle("Sign Up")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: backButton)
+            .disabled(isSigningUp)
         }
-        .padding()
-        .navigationTitle("Sign Up")
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: backButton)
-        .disabled(isSigningUp)
     }
 
     var backButton: some View {
